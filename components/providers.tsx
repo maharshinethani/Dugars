@@ -1,0 +1,34 @@
+'use client';
+
+import { ReactNode } from 'react';
+import { LocaleProvider } from '@/lib/locale-context';
+import { CartProvider } from '@/lib/cart-context';
+import { WishlistProvider } from '@/lib/wishlist-context';
+import { SettingsProvider } from '@/lib/settings-context';
+import { CurrencyProvider } from '@/lib/currency-context';
+import { ThemeProvider } from '@/lib/theme-context';
+import { Toaster } from '@/components/ui/sonner';
+
+export function Providers({ children }: { children: ReactNode }) {
+  return (
+    <ThemeProvider>
+      <SettingsProvider>
+        <LocaleProvider>
+          <CurrencyProvider>
+            <CartProvider>
+              <WishlistProvider>
+                {children}
+                <Toaster
+                  position="top-center"
+                  toastOptions={{
+                    className: 'theme-toast',
+                  }}
+                />
+              </WishlistProvider>
+            </CartProvider>
+          </CurrencyProvider>
+        </LocaleProvider>
+      </SettingsProvider>
+    </ThemeProvider>
+  );
+}
